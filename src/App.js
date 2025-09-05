@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import LandingPage from "./components/landing/LandingPage";
+// later: import MainPage from "./components/main/MainPage";
 
-function App() {
+export default function App() {
+  const [showLanding, setShowLanding] = useState(true);
+
+  function handleClick() {
+    // When user clicks anywhere on the landing page
+    setShowLanding(false);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" onClick={showLanding ? handleClick : undefined}>
+      {showLanding ? (
+        <LandingPage />
+      ) : (
+        <div>
+          {/* Replace with <MainPage /> later */}
+          <h1 style={{ textAlign: "center", marginTop: "40px" }}>
+            Main Page Placeholder
+          </h1>
+        </div>
+      )}
     </div>
   );
 }
-
-export default App;

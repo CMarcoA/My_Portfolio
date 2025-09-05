@@ -1,0 +1,81 @@
+:root {
+  --lp-ink: rgba(0, 0, 0, 0.88);
+  --lp-ink-soft: rgba(0, 0, 0, 0.65);
+  --lp-white: #ffffff;
+}
+
+/* ROOT */
+.lp-root {
+  position: relative;
+  min-height: 100vh;
+  color: var(--lp-ink);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
+  overflow: hidden;
+}
+
+/* FULL-SCREEN VIDEO BACKGROUND (locked to viewport) */
+.lp-video {
+  position: fixed;      /* <-- keep it glued to the viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* SOFT BLUE GRADIENT OVERLAY */
+.lp-gradient {
+  position: fixed;      /* <-- matches the video’s coordinates */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(
+    55% 60% at 70% 20%,
+    #eaf5ff 0%,
+    #8dccff 45%,
+    #a6d6ff 60%,
+    #cfe7ff 85%
+  );
+  opacity: 0.95;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* CONTENT: center vertically/horizontally */
+.lp-content {
+  position: relative;
+  z-index: 2;           /* above video + gradient */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;   /* vertical center */
+  justify-content: center; /* center the 50% container */
+  padding: 24px;
+}
+
+/* QUOTE BLOCK: 50% width, left-aligned text */
+.lp-quote-wrap {
+  width: 50vw;          /* exactly 50% of viewport width */
+  max-width: 900px;     /* optional clamp */
+  text-align: left;     /* left align text */
+}
+
+/* QUOTE */
+.lp-quote { margin: 0 0 16px 0; }
+
+.lp-quote-text {
+  font-size: clamp(28px, 3.6vw, 48px);
+  line-height: 1.28;
+  color: var(--lp-ink);
+  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.55);
+}
+
+.lp-quote-author {
+  margin-top: 10px;
+  font-size: clamp(12px, 1.4vw, 16px);
+  color: var(--lp-ink-soft);
+}
+
+/* remove any default button styles if still present elsewhere */
+.lp-btn { display: none; }
