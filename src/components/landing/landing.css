@@ -62,7 +62,29 @@
 }
 
 /* QUOTE */
-.lp-quote { margin: 0 0 16px 0; }
+/* ===== Smooth fade on quote swap =====*/
+.lp-quote {
+  will-change: opacity, transform;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.lp-fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lp-fade-out {
+  opacity: 0;
+  transform: translateY(6px); /* tiny dip while fading out */
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .lp-quote { transition: none; }
+  .lp-fade-out, .lp-fade-in { transform: none; }
+}
+
+/*===== =====*/
 
 .lp-quote-text {
   font-size: clamp(28px, 3.6vw, 48px);
