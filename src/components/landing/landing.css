@@ -62,42 +62,54 @@
 }
 
 /* QUOTE */
-/* ===== Smooth fade on quote swap =====*/
+/* ===== Smooth fade on quote swap =====*//* Make the whole quote clickable */
 .lp-quote {
+  margin: 0 0 16px 0;
   will-change: opacity, transform;
   transition: opacity 220ms ease, transform 220ms ease;
+  cursor: pointer;
+  outline: none;
 }
 
+.lp-quote:focus {
+  /* subtle focus ring for a11y */
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+  border-radius: 8px;
+}
+
+/* 20% bigger than before + bold */
+.lp-quote-text {
+  /* previous: clamp(28px, 3.6vw, 48px) */
+  font-size: clamp(34px, 4.32vw, 58px);  /* ≈ +20% */
+  font-weight: 800;                      /* bold quote */
+  line-height: 1.28;
+  color: var(--lp-ink);
+  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.55); /* soft glow */
+}
+
+/* Author stays unbolded but with a subtle shadow */
+.lp-quote-author {
+  margin-top: 10px;
+  font-size: clamp(12px, 1.4vw, 16px);
+  font-weight: 400;                      /* normal weight */
+  color: var(--lp-ink-soft);
+  text-shadow: 0 1px 6px rgba(255, 255, 255, 0.5);
+}
+
+/* Fade animation states */
 .lp-fade-in {
   opacity: 1;
   transform: translateY(0);
 }
-
 .lp-fade-out {
   opacity: 0;
-  transform: translateY(6px); /* tiny dip while fading out */
+  transform: translateY(6px);
 }
 
-/* Respect reduced motion */
+/* Reduced motion respect */
 @media (prefers-reduced-motion: reduce) {
   .lp-quote { transition: none; }
   .lp-fade-out, .lp-fade-in { transform: none; }
 }
-
 /*===== =====*/
 
-.lp-quote-text {
-  font-size: clamp(28px, 3.6vw, 48px);
-  line-height: 1.28;
-  color: var(--lp-ink);
-  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.55);
-}
-
-.lp-quote-author {
-  margin-top: 10px;
-  font-size: clamp(12px, 1.4vw, 16px);
-  color: var(--lp-ink-soft);
-}
-
-/* remove any default button styles if still present elsewhere */
-.lp-btn { display: none; }
