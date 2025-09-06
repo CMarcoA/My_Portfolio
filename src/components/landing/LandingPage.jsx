@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import QuoteGenerator from "./QuoteGenerator";
 import "./landing.css";
 
@@ -21,6 +21,31 @@ import "./landing.css";
  *   - Props aren't needed here, but if we had them, they'd be like constructor params.
  */
 export default function LandingPage() {
+  /**
+   * Scroll lock (Option A):
+   * - While the LandingPage is mounted, disable page scrolling.
+   * - On unmount, restore previous scroll/overscroll settings.
+   *
+   * React ↔ Java mapping:
+   * - useEffect here ≈ a lifecycle hook that runs on construct/mount and cleans up on destroy,
+   *   similar to acquiring a resource in a constructor and releasing it in a finally/close().
+   */
+  useEffect(() => {
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    const prevOverscroll   = document.documentElement.style.overscrollBehavior;
+
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    document.documentElement.style.overscrollBehavior = "none"; // prevent bounce on touch devices
+
+    return () => {
+      document.body.style.overflow = prevBodyOverflow || "";
+      document.documentElement.style.overflow = prevHtmlOverflow || "";
+      document.documentElement.style.overscrollBehavior = prevOverscroll || "";
+    };
+  }, []);
+
   return (
     <section className="lp-root">
       {/* 
