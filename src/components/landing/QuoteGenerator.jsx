@@ -4,46 +4,39 @@ import "./landing.css";
 /**
  * QuoteGenerator.jsx
  * - Auto-rotates quotes every `autoRotateSeconds`
- * - Fade-out -> swap -> fade-in on change
- * - Click (or Enter/Space) advances to next quote immediately
- *
- * React ↔ Java mapping:
- * - useState = private fields that trigger UI refresh
- * - useEffect = lifecycle+scheduled work (like a Java scheduler)
- * - setInterval = timer; we reset it on manual clicks to avoid double swaps
+ * - Fade-out -> swap -> fade-in on change (outer wrapper handles fade)
+ * - Click (or Enter/Space) advances to next quote
+ * - Zoom-out on click: inner wrapper scales down briefly, then returns
  */
 export default function QuoteGenerator({
   quotes = DEFAULT_QUOTES,
   autoRotateSeconds = 4,
-  fadeMs = 220,
+  fadeMs = 220,   // fade duration (keep in sync with CSS)
+  popMs = 180,    // zoom-out duration (keep in sync with CSS)
 }) {
   const [current, setCurrent] = useState(() => pickRandom(quotes));
-  const [fading, setFading] = useState(false);
+  const [fading, setFading]   = useState(false);
+  const [popping, setPopping] = useState(false); // reused flag for zoom-out
 
-  // Timers kept in refs so they persist without re-rendering
-  const timerRef = useRef(null); // interval for auto-rotate
-  const fadeRef = useRef(null);  // timeout for fade duration
+  const autoTimerRef = useRef(null);
+  const fadeTimerRef = useRef(null);
+  const popTimerRef  = useRef(null);
 
-  // Start the auto-rotate when mounted; clean up when unmounted
   useEffect(() => {
     startAuto();
     return () => {
-      clearInterval(timerRef.current);
-      clearTimeout(fadeRef.current);
+      clearInterval(autoTimerRef.current);
+      clearTimeout(fadeTimerRef.current);
+      clearTimeout(popTimerRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoRotateSeconds, quotes]);
 
   function startAuto() {
-    clearInterval(timerRef.current);
+    clearInterval(autoTimerRef.current);
     if (autoRotateSeconds > 0) {
-      timerRef.current = setInterval(() => changeQuote(), autoRotateSeconds * 1000);
+      autoTimerRef.current = setInterval(() => changeQuote(), autoRotateSeconds * 1000);
     }
-  }
-
-  function resetAuto() {
-    // restart the interval so next auto change happens `autoRotateSeconds` after a manual click
-    startAuto();
   }
 
   function pickRandom(arr) {
@@ -51,25 +44,28 @@ export default function QuoteGenerator({
   }
 
   function changeQuote() {
-    setFading(true);                // start fade-out
-    clearTimeout(fadeRef.current);
-    fadeRef.current = setTimeout(() => {
+    setFading(true); // fade-out
+    clearTimeout(fadeTimerRef.current);
+    fadeTimerRef.current = setTimeout(() => {
       setCurrent((prev) => {
         let next = pickRandom(quotes);
-        while (quotes.length > 1 && next.text === prev.text) {
-          next = pickRandom(quotes); // avoid immediate repeat
-        }
+        while (quotes.length > 1 && next.text === prev.text) next = pickRandom(quotes);
         return next;
       });
-      setFading(false);             // fade-in
+      setFading(false); // fade-in
     }, fadeMs);
   }
 
   function handleManualAdvance(e) {
-    // Prevent bubbling to anything on the page (e.g., global click handlers)
     e.stopPropagation?.();
+
+    // Trigger zoom-out animation on click
+    setPopping(true);
+    clearTimeout(popTimerRef.current);
+    popTimerRef.current = setTimeout(() => setPopping(false), popMs);
+
     changeQuote();
-    resetAuto();
+    startAuto(); // reset timer so auto runs popMs after click
   }
 
   function handleKey(e) {
@@ -89,8 +85,11 @@ export default function QuoteGenerator({
         onClick={handleManualAdvance}
         onKeyDown={handleKey}
       >
-        <p className="lp-quote-text">“{current.text}”</p>
-        <footer className="lp-quote-author">— {current.author}</footer>
+        {/* Inner wrapper scales down for zoom-out so it doesn't fight the outer fade transform */}
+        <div className={`lp-quote-inner ${popping ? "lp-zoom-out" : ""}`}>
+          <p className="lp-quote-text">“{current.text}”</p>
+          <footer className="lp-quote-author">— {current.author}</footer>
+        </div>
       </blockquote>
     </div>
   );
