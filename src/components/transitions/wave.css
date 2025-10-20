@@ -1,0 +1,85 @@
+/* Wave Transition Styles */
+.wave-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9998;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.wave-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #00193A;
+  animation: waveSlide 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  will-change: transform;
+}
+
+.wave-1 {
+  animation-delay: 0s;
+  background: linear-gradient(180deg, #00193A 0%, #09284f 100%);
+}
+
+.wave-2 {
+  animation-delay: 0.15s;
+  background: linear-gradient(180deg, #09284f 0%, #00193A 100%);
+  opacity: 0.8;
+}
+
+.wave-3 {
+  animation-delay: 0.3s;
+  background: linear-gradient(180deg, #00193A 0%, #09284f 100%);
+  opacity: 0.6;
+}
+
+/* Smooth wave slide animation */
+@keyframes waveSlide {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+/* Add subtle wave curve using border-radius */
+.wave::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: inherit;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .wave {
+    animation-duration: 1s;
+  }
+}
+
+@media (max-width: 480px) {
+  .wave {
+    animation-duration: 0.8s;
+  }
+}

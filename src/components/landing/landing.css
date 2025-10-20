@@ -16,6 +16,19 @@
 
   font-family: "Jomolhari", Georgia, "Times New Roman", serif;
   font-synthesis: weight;
+  
+  /* Fade-in transition */
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.lp-root.fade-in {
+  opacity: 1;
+}
+
+.lp-root.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
 }
 
 /* FULL-SCREEN VIDEO BACKGROUND (locked to viewport) */
@@ -139,19 +152,120 @@
   animation: lp-zoom-out 180ms ease-out;
 }
 
-// ===========
-/* Inner wrapper: only this scales so it won't conflict with the outer fade's transform */
-.lp-quote-inner {
-  display: inline-block;
-  transform-origin: left center;
+/* PROMPT BUTTON */
+.lp-prompt-btn {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  
+  /* Button styling like navbar */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--lp-ink);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+  
+  /* Typography */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
+  font-size: clamp(14px, 1.8vw, 16px);
+  font-weight: 600;
+  text-decoration: none;
+  
+  /* Animations */
+  opacity: 0;
+  animation: promptFadeIn 0.8s ease-out 0.2s forwards, glowPulse 2s ease-in-out infinite;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease, border 120ms ease;
+  
+  /* Glow effect */
+  backdrop-filter: blur(8px);
 }
 
-/* Zoom-out animation: shrink slightly then return to 1 */
-@keyframes lp-zoom-out {
-  0%   { transform: scale(1); }
-  45%  { transform: scale(0.94); } /* tweak 0.92–0.97 to taste */
-  100% { transform: scale(1); }
+.lp-prompt-btn:hover {
+  transform: translateX(-50%) translateY(-1px) scale(1.02);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+  background: rgba(255, 255, 255, 0.95);
 }
-.lp-zoom-out {
-  animation: lp-zoom-out 180ms ease-out;
+
+/* Ripple effect - add to existing button */
+
+.lp-prompt-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91, 163, 217, 1) 0%, rgba(91, 163, 217, 0.6) 30%, rgba(91, 163, 217, 0.3) 60%, transparent 100%);
+  transform: translate(-50%, -50%);
+  transition: width 0.8s ease-out, height 0.8s ease-out, opacity 0.8s ease-out;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 1;
+  filter: blur(2px);
+}
+
+.lp-prompt-btn.ripple-active::before {
+  width: 500px;
+  height: 500px;
+  opacity: 0;
+}
+
+/* Debug: Make ripple more visible */
+.lp-prompt-btn.ripple-active {
+  background: rgba(255, 255, 255, 0.8) !important;
+}
+
+@keyframes promptFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 
+      0 4px 18px rgba(0, 0, 0, 0.1),
+      0 0 25px rgba(91, 163, 217, 0.5),
+      0 0 35px rgba(91, 163, 217, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 4px 18px rgba(0, 0, 0, 0.1),
+      0 0 35px rgba(91, 163, 217, 0.8),
+      0 0 50px rgba(91, 163, 217, 0.6),
+      0 0 65px rgba(91, 163, 217, 0.4);
+  }
+}
+
+/* Responsive adjustments for prompt button */
+@media (max-width: 768px) {
+  .lp-prompt-btn {
+    bottom: 30px;
+    height: 36px;
+    padding: 0 16px;
+    font-size: clamp(12px, 1.6vw, 14px);
+  }
+}
+
+@media (max-width: 480px) {
+  .lp-prompt-btn {
+    bottom: 20px;
+    height: 32px;
+    padding: 0 14px;
+    font-size: clamp(11px, 1.4vw, 13px);
+  }
 }

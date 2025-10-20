@@ -90,7 +90,7 @@ function Card({ card, index, removeCard, totalCards }) {
       <div className="mp-card-inner">
         <div className="mp-card-header">{card.title}</div>
         <div className="mp-card-image" style={{ backgroundImage: `url(${card.image})` }} />
-        <div className="mp-card-caption">This was a very cool mountain in Vancouver Tantalus Range</div>
+        <div className="mp-card-caption">{card.caption}</div>
       </div>
     </motion.div>
   );

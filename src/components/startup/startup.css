@@ -1,0 +1,174 @@
+/* Import Jersey25 Font */
+@import url('https://fonts.googleapis.com/css2?family=Jersey+25&display=swap');
+
+/* SEGA-Style Startup Screen */
+.startup-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Video Background */
+.startup-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Soft Blue Gradient Overlay (same as landing page) */
+.startup-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    55% 60% at 70% 20%,
+    #eaf5ff 0%,
+    #8dccff 45%,
+    #a6d6ff 60%,
+    #cfe7ff 85%
+  );
+  opacity: 0.95;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.sega-container {
+  text-align: center;
+  position: relative;
+  z-index: 3;
+}
+
+/* Fade Out Effect */
+.startup-screen {
+  transition: opacity 0.5s ease-out;
+}
+
+.startup-screen.fade-out {
+  opacity: 0;
+}
+
+/* SEGA Logo */
+.sega-logo {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.sega-logo.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.sega-text {
+  font-family: 'Jersey 25', 'Arial Black', Arial, sans-serif;
+  font-size: 12rem;
+  font-weight: 400;
+  color: #fff;
+  text-shadow: 
+    0 0 10px #fff,
+    0 0 20px #fff,
+    0 0 30px #fff,
+    0 0 40px #5BA3D9,
+    0 0 70px #5BA3D9,
+    0 0 80px #5BA3D9,
+    0 0 100px #5BA3D9,
+    0 0 150px #5BA3D9,
+    /* Concave effect shadows */
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    0 8px 16px rgba(0, 0, 0, 0.2),
+    0 12px 24px rgba(0, 0, 0, 0.1),
+    /* Inner concave highlight */
+    inset 0 2px 4px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.1em;
+  animation: segaGlow 2s ease-in-out infinite alternate;
+  /* Add 3D transform for concave effect */
+  transform: perspective(1000px) rotateX(15deg);
+  transform-style: preserve-3d;
+}
+
+/* SEGA Subtitle */
+.sega-subtitle {
+  font-family: 'Jersey 25', 'Arial', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.3em;
+  margin-top: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+  /* Subtle glow effect */
+  text-shadow: 
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 15px #5BA3D9,
+    0 0 20px #5BA3D9;
+}
+
+.sega-subtitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes segaGlow {
+  from {
+    text-shadow: 
+      0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 30px #fff,
+      0 0 40px #5BA3D9,
+      0 0 70px #5BA3D9,
+      0 0 80px #5BA3D9,
+      0 0 100px #5BA3D9,
+      0 0 150px #5BA3D9;
+  }
+  to {
+    text-shadow: 
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px #fff,
+      0 0 20px #5BA3D9,
+      0 0 35px #5BA3D9,
+      0 0 40px #5BA3D9,
+      0 0 50px #5BA3D9,
+      0 0 75px #5BA3D9;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sega-text {
+    font-size: 8rem;
+    transform: perspective(800px) rotateX(10deg);
+  }
+  
+  .sega-subtitle {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sega-text {
+    font-size: 6rem;
+    transform: perspective(600px) rotateX(8deg);
+  }
+  
+  .sega-subtitle {
+    font-size: 1.2rem;
+  }
+}

@@ -45,7 +45,7 @@ export default function InfoPanel({ activeIndex = 0 }) {
         },
         {
           image: "/media/permika-president.jpg",
-          title: "PERMIKA - Co President",
+          title: "PERMIKA - Co-President & Secretary",
           route: "/experience"
         }
       ]
