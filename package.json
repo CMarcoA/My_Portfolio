@@ -2,7 +2,7 @@
   "name": "cma_portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://cmarcoa.github.io/PortfolioWebsite4",
+  "homepage": "https://cmarcoa.github.io/My_Portfolio",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
