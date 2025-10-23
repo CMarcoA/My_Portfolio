@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import InfoBox from "./InfoBox";
 import "./main.css";
 
@@ -11,6 +11,21 @@ import "./main.css";
  * Everything else remains in the model but is not shown.
  */
 export default function InfoPanel({ activeIndex = 0 }) {
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleTitleHover = () => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      // Let the animation finish naturally (1s duration + staggered delays)
+      // The last letter will finish at: 1s + (letterCount * 0.05s)
+      const letterCount = "Claudius Marco".length;
+      const totalDuration = 1000 + (letterCount * 50); // 1s + delays
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, totalDuration);
+    }
+  };
+
   const sections = [
     {
       key: "about",
@@ -107,9 +122,32 @@ export default function InfoPanel({ activeIndex = 0 }) {
   return (
     <aside className="mp-info mp-info--hero">
       <h1 className="mp-title">
-        {s.headingLines.map((line, i) => (
-          <span key={i} className="mp-title-line">{line}</span>
-        ))}
+        {s.headingLines.map((line, i) => {
+          // For the first line (Claudius Marco Andrew), wrap each letter in a span
+          if (i === 0) {
+            return (
+              <span 
+                key={i} 
+                className={`mp-title-line bouncing-title ${isAnimating ? 'animating' : ''}`}
+                onMouseEnter={handleTitleHover}
+              >
+                {line.split('').map((letter, letterIndex) => (
+                  <span 
+                    key={letterIndex} 
+                    className="bouncing-letter"
+                    style={{ '--letter-delay': `${letterIndex * 0.05}s` }}
+                  >
+                    {letter === ' ' ? '\u00A0' : letter}
+                  </span>
+                ))}
+              </span>
+            );
+          }
+          // For other lines, render normally
+          return (
+            <span key={i} className="mp-title-line">{line}</span>
+          );
+        })}
       </h1>
 
       {/* Only the first paragraph for this section */}

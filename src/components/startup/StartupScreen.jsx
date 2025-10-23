@@ -7,7 +7,6 @@ export default function StartupScreen({ onComplete }) {
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    // SEGA-style timing - longer animation
     const logoTimer = setTimeout(() => setShowLogo(true), 800);
     const textTimer = setTimeout(() => setShowText(true), 2000);
     const fadeTimer = setTimeout(() => setFadeOut(true), 4000);
@@ -22,24 +21,21 @@ export default function StartupScreen({ onComplete }) {
   }, [onComplete]);
 
   const handleClick = () => {
-    // Clear any pending timers
     setFadeOut(true);
-    // Trigger transition after fade starts
     setTimeout(() => onComplete(), 500);
   };
 
   return (
-    <div 
+    <div
       className={`startup-screen ${fadeOut ? 'fade-out' : ''}`}
       onClick={handleClick}
     >
-      {/* Video Background */}
       <video className="startup-video" autoPlay loop muted playsInline>
         <source src="/media/shadergradient.webm" type="video/webm" />
         <source src="/media/shadergradient.mp4" type="video/mp4" />
       </video>
       <div className="startup-overlay" />
-      
+
       <div className="sega-container">
         <div className={`sega-logo ${showLogo ? 'visible' : ''}`}>
           <div className="sega-text">CMA</div>

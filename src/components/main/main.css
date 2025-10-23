@@ -123,6 +123,40 @@
 .mp-info--hero .mp-title-line {
   font-size: clamp(52px, 8.5vw, 110px);
 }
+
+/* Bouncing letters animation */
+.bouncing-title {
+  display: inline-block;
+}
+
+.bouncing-letter {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation-delay: var(--letter-delay);
+}
+
+.bouncing-title.animating .bouncing-letter {
+  animation: letterBounce 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  animation-delay: var(--letter-delay);
+}
+
+@keyframes letterBounce {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-15px) scale(1.1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.05);
+  }
+  75% {
+    transform: translateY(-12px) scale(1.08);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
 .mp-body { max-width: 52ch; }
 .mp-lead {
   font-size: clamp(16px, 1.3vw, 20px);
