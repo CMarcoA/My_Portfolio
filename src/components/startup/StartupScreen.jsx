@@ -47,3 +47,4 @@ export default function StartupScreen({ onComplete }) {
     </div>
   );
 }
+
