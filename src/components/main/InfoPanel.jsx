@@ -51,17 +51,17 @@ export default function InfoPanel({ activeIndex = 0 }) {
         {
           image: "/media/hci-research.jpg",
           title: "HCI Research Student",
-          route: "/experience"
+          route: "/experience/hci-research-student"
         },
         {
           image: "/media/kawasaki-intern.jpg", 
           title: "Kawasaki Sales Intern",
-          route: "/experience"
+          route: "/experience/kawasaki-sales-intern"
         },
         {
           image: "/media/permika-president.jpg",
           title: "PERMIKA - Co-President & Secretary",
-          route: "/experience"
+          route: "/experience/permika-co-president"
         }
       ]
     },

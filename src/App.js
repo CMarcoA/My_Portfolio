@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import StartupScreen from "./components/startup/StartupScreen";
 import LandingPage from "./components/landing/LandingPage";
 import MainPage from "./components/main/MainPage";
@@ -44,7 +44,7 @@ export default function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/experience/:experienceId?" element={<ExperiencePage />} />
           <Route path="/hobbies" element={<HobbiesPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
         </Routes>
