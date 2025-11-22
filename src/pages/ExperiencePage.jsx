@@ -1,6 +1,7 @@
-import React, { useRef, useEffect, useState, useCallback, useMemo } from "react";
+import React, { useRef, useEffect, useMemo, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/main/Navbar";
+import TitleStepper from "../components/main/TitleStepper";
 import "../components/main/main.css";
 import "./experience.css";
 import { getExperienceById, getExperienceNeighbors } from "./experienceData";
@@ -11,29 +12,7 @@ export default function ExperiencePage() {
   const experience = useMemo(() => getExperienceById(experienceId), [experienceId]);
   const neighbors = useMemo(() => getExperienceNeighbors(experience.id), [experience.id]);
   const carouselRef = useRef(null);
-
-  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
   const scrollDirectionRef = useRef(1); // 1 for down, -1 for up
-  const idleTimeoutRef = useRef(null);
-
-  const pauseAutoScroll = useCallback(() => {
-    setIsAutoScrolling(false);
-    if (idleTimeoutRef.current) {
-      clearTimeout(idleTimeoutRef.current);
-    }
-  }, []);
-
-  const resumeAutoScroll = useCallback(() => {
-    if (idleTimeoutRef.current) {
-      clearTimeout(idleTimeoutRef.current);
-    }
-    idleTimeoutRef.current = setTimeout(() => {
-      if (!isHovered) {
-        setIsAutoScrolling(true);
-      }
-    }, 1500); // Resume after 1.5 seconds of inactivity
-  }, [isHovered]);
 
   // Auto-scroll animation
   useEffect(() => {
@@ -41,66 +20,45 @@ export default function ExperiencePage() {
     if (!carousel) return;
 
     let animationFrame;
-    const scroll = () => {
-      if (isAutoScrolling && !isHovered && carousel) {
-        const maxScroll = carousel.scrollHeight - carousel.clientHeight;
-        if (maxScroll > 0) {
-          let nextScroll = carousel.scrollTop + 2.5 * scrollDirectionRef.current;
-          
-          if (nextScroll <= 0) {
-            nextScroll = 0;
-            scrollDirectionRef.current = 1; // Change direction to down
-          } else if (nextScroll >= maxScroll) {
-            nextScroll = maxScroll;
-            scrollDirectionRef.current = -1; // Change direction to up
-          }
-          
-          carousel.scrollTop = nextScroll;
-        }
+    let lastTime = performance.now();
+    const scrollSpeed = 0.1; // pixels per millisecond
+    
+    const scroll = (currentTime) => {
+      if (!carousel) {
+        animationFrame = requestAnimationFrame(scroll);
+        return;
       }
+
+      const deltaTime = currentTime - lastTime;
+      lastTime = currentTime;
+      
+      const maxScroll = carousel.scrollHeight - carousel.clientHeight;
+      if (maxScroll > 0) {
+        const scrollAmount = scrollSpeed * deltaTime * scrollDirectionRef.current;
+        let nextScroll = carousel.scrollTop + scrollAmount;
+        
+        if (nextScroll <= 0) {
+          nextScroll = 0;
+          scrollDirectionRef.current = 1; // Change direction to down
+        } else if (nextScroll >= maxScroll) {
+          nextScroll = maxScroll;
+          scrollDirectionRef.current = -1; // Change direction to up
+        }
+        
+        carousel.scrollTop = nextScroll;
+      }
+      
       animationFrame = requestAnimationFrame(scroll);
     };
 
+    lastTime = performance.now();
     animationFrame = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(animationFrame);
-  }, [isAutoScrolling, isHovered, experience.media]);
-
-  // Handle manual scrolling
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-
-    const handleScroll = () => {
-      pauseAutoScroll();
-      resumeAutoScroll();
-    };
-
-    const handleWheel = () => {
-      pauseAutoScroll();
-      resumeAutoScroll();
-    };
-
-    carousel.addEventListener('scroll', handleScroll);
-    carousel.addEventListener('wheel', handleWheel, { passive: true });
-
     return () => {
-      carousel.removeEventListener('scroll', handleScroll);
-      carousel.removeEventListener('wheel', handleWheel);
-      if (idleTimeoutRef.current) {
-        clearTimeout(idleTimeoutRef.current);
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
       }
     };
-  }, [pauseAutoScroll, resumeAutoScroll]);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    pauseAutoScroll();
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    resumeAutoScroll();
-  };
+  }, [experience.media]);
 
   const handleNavigate = useCallback((direction) => {
     const target = direction === "prev" ? neighbors.previous : neighbors.next;
@@ -123,8 +81,6 @@ export default function ExperiencePage() {
             <div 
               className="experience-carousel"
               ref={carouselRef}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
             >
               {experience.media.map((item, index) => (
                 <div key={index} className="experience-carousel-item">
@@ -141,23 +97,47 @@ export default function ExperiencePage() {
           </div>
           <div className="experience-right">
             <div className="experience-header">
-              <button
-                type="button"
-                className="experience-nav-arrow experience-nav-arrow--left"
-                onClick={() => handleNavigate("prev")}
-                aria-label={`Previous: ${neighbors.previous.title}`}
-              >
-                ‹
-              </button>
-              <h1 className="experience-title">{experience.title}</h1>
-              <button
-                type="button"
-                className="experience-nav-arrow experience-nav-arrow--right"
-                onClick={() => handleNavigate("next")}
-                aria-label={`Next: ${neighbors.next.title}`}
-              >
-                ›
-              </button>
+              <TitleStepper
+                title={experience.title}
+                onPrev={() => handleNavigate("prev")}
+                onNext={() => handleNavigate("next")}
+              />
+            </div>
+            <div className="experience-content">
+              {experience.about && experience.about.length > 0 && (
+                <div className="experience-section">
+                  <h2 className="experience-section-title">About</h2>
+                  <div className="experience-section-content">
+                    {experience.about.map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {experience.learned && experience.learned.length > 0 && (
+                <div className="experience-section">
+                  <h2 className="experience-section-title">What I Learnt</h2>
+                  <div className="experience-section-content">
+                    <ul className="experience-list">
+                      {experience.learned.map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+              {experience.contributions && experience.contributions.length > 0 && (
+                <div className="experience-section">
+                  <h2 className="experience-section-title">Contributions</h2>
+                  <div className="experience-section-content">
+                    <ul className="experience-list">
+                      {experience.contributions.map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

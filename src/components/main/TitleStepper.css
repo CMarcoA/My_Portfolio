@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+25&display=swap');
+
+.title-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+  height: 40px;
+  padding: 0 8px;
+}
+
+/* Triangle buttons using borders */
+.stepper-arrow {
+  width: 0;
+  height: 0;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  background: transparent;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+}
+
+/* Left grey triangle */
+.stepper-arrow-left {
+  border-right: 22px solid #a0a0a0;
+}
+
+/* Right grey triangle */
+.stepper-arrow-right {
+  border-left: 22px solid #a0a0a0;
+}
+
+/* Center title styling - matching main page titles */
+.stepper-title {
+  flex: 1;
+  text-align: center;
+  font-family: 'Jersey 25', 'Arial Black', Arial, sans-serif;
+  font-weight: 400;
+  font-size: clamp(20px, 4vw, 55px);
+  letter-spacing: 0.3px;
+  color: #00193A;
+  text-transform: uppercase;
+}
+
