@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useMemo, useCallback } from "react";
+import React, { useRef, useEffect, useMemo, useCallback, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/main/Navbar";
 import TitleStepper from "../components/main/TitleStepper";
@@ -13,6 +13,7 @@ export default function ExperiencePage() {
   const neighbors = useMemo(() => getExperienceNeighbors(experience.id), [experience.id]);
   const carouselRef = useRef(null);
   const scrollDirectionRef = useRef(1); // 1 for down, -1 for up
+  const [isHovered, setIsHovered] = useState(false);
 
   // Auto-scroll animation
   useEffect(() => {
@@ -21,10 +22,10 @@ export default function ExperiencePage() {
 
     let animationFrame;
     let lastTime = performance.now();
-    const scrollSpeed = 0.1; // pixels per millisecond
+    const scrollSpeed = 0.03; // pixels per millisecond
     
     const scroll = (currentTime) => {
-      if (!carousel) {
+      if (!carousel || isHovered) {
         animationFrame = requestAnimationFrame(scroll);
         return;
       }
@@ -39,10 +40,10 @@ export default function ExperiencePage() {
         
         if (nextScroll <= 0) {
           nextScroll = 0;
-          scrollDirectionRef.current = 1; // Change direction to down
+          scrollDirectionRef.current = 1; // Immediately change direction to down
         } else if (nextScroll >= maxScroll) {
           nextScroll = maxScroll;
-          scrollDirectionRef.current = -1; // Change direction to up
+          scrollDirectionRef.current = -1; // Immediately change direction to up
         }
         
         carousel.scrollTop = nextScroll;
@@ -58,12 +59,16 @@ export default function ExperiencePage() {
         cancelAnimationFrame(animationFrame);
       }
     };
-  }, [experience.media]);
+  }, [experience.media, isHovered]);
 
   const handleNavigate = useCallback((direction) => {
     const target = direction === "prev" ? neighbors.previous : neighbors.next;
     navigate(`/experience/${target.id}`);
   }, [navigate, neighbors]);
+
+  const handleExit = useCallback(() => {
+    navigate('/');
+  }, [navigate]);
 
   return (
     <div className="experience-root">
@@ -77,10 +82,19 @@ export default function ExperiencePage() {
       
       <div className="experience-container">
         <div className="experience-box">
+          <button 
+            className="experience-exit-button"
+            onClick={handleExit}
+            aria-label="Exit to main page"
+          >
+            ×
+          </button>
           <div className="experience-left">
             <div 
               className="experience-carousel"
               ref={carouselRef}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             >
               {experience.media.map((item, index) => (
                 <div key={index} className="experience-carousel-item">
@@ -138,6 +152,13 @@ export default function ExperiencePage() {
                   </div>
                 </div>
               )}
+            </div>
+            <div className="experience-footer">
+              <TitleStepper
+                title="Exit"
+                onPrev={() => handleNavigate("prev")}
+                onNext={handleExit}
+              />
             </div>
           </div>
         </div>
