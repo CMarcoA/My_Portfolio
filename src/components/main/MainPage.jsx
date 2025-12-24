@@ -21,10 +21,10 @@ export default function MainPage() {
   const footerTimerRef = useRef(null);
 
   const cards = [
-    { id: 0, title: "About me", image: "/media/img1.jpg", caption: "Passionate CS student exploring HCI research and robotics" },
-    { id: 1, title: "Experience", image: "/media/img1.jpg", caption: "Building skills in research, sales, and leadership roles" },
-    { id: 2, title: "Projects", image: "/media/img1.jpg", caption: "Creating innovative solutions through coding and collaboration" },
-    { id: 3, title: "Hobbies", image: "/media/img1.jpg", caption: "Capturing moments through photography and tinkering with Arduino" },
+    { id: 0, title: "About me", image: `${process.env.PUBLIC_URL || ''}/media/img1.jpg`, caption: "Passionate CS student exploring HCI research and robotics" },
+    { id: 1, title: "Experience", image: `${process.env.PUBLIC_URL || ''}/media/img1.jpg`, caption: "Building skills in research, sales, and leadership roles" },
+    { id: 2, title: "Projects", image: `${process.env.PUBLIC_URL || ''}/media/img1.jpg`, caption: "Creating innovative solutions through coding and collaboration" },
+    { id: 3, title: "Hobbies", image: `${process.env.PUBLIC_URL || ''}/media/img1.jpg`, caption: "Capturing moments through photography and tinkering with Arduino" },
   ];
 
   useEffect(() => {

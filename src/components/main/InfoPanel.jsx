@@ -41,13 +41,13 @@ export default function InfoPanel({ activeIndex = 0, showFooterPopup = false }) 
       footerNote: "Swipe the Polaroid cards →",
       showInfoBoxes: false,
       logos: [
-        { src: "/media/logos/css3.png", alt: "CSS3" },
-        { src: "/media/logos/python.png", alt: "Python" },
-        { src: "/media/logos/ros.png", alt: "ROS" },
-        { src: "/media/logos/html15-js.png", alt: "HTML5 & JavaScript" },
-        { src: "/media/logos/html15.png", alt: "HTML5" },
-        { src: "/media/logos/react.png", alt: "React" },
-        { src: "/media/logos/java.png", alt: "Java" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/java.png`, alt: "Java" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/react.png`, alt: "React" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/ros.png`, alt: "ROS" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/html15.png`, alt: "HTML5" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/css3.png`, alt: "CSS3" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/html15-js.png`, alt: "HTML5 & JavaScript" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/python.png`, alt: "Python" },
       ],
     },
     {
@@ -59,17 +59,17 @@ export default function InfoPanel({ activeIndex = 0, showFooterPopup = false }) 
       showInfoBoxes: true,
       infoBoxes: [
         {
-          image: "/media/hci-research.jpg",
+          image: `${process.env.PUBLIC_URL || ''}/media/hci-research.jpg`,
           title: "HCI Research Student",
           route: "/experience/hci-research-student"
         },
         {
-          image: "/media/kawasaki-intern.jpg", 
+          image: `${process.env.PUBLIC_URL || ''}/media/kawasaki-intern.jpg`, 
           title: "Kawasaki Sales Intern",
           route: "/experience/kawasaki-sales-intern"
         },
         {
-          image: "/media/permika-president.jpg",
+          image: `${process.env.PUBLIC_URL || ''}/media/permika-president.jpg`,
           title: "PERMIKA - Co-President & Secretary",
           route: "/experience/permika-co-president"
         }
@@ -84,17 +84,17 @@ export default function InfoPanel({ activeIndex = 0, showFooterPopup = false }) 
       showInfoBoxes: true,
       infoBoxes: [
         {
-          image: "/media/jackal-research.jpg",
+          image: `${process.env.PUBLIC_URL || ''}/media/jackal-research.jpg`,
           title: "Jackal Research",
           route: "/projects/jackal-research"
         },
         {
-          image: "/media/devhacks-2025.jpg",
+          image: `${process.env.PUBLIC_URL || ''}/media/devhacks-2025.jpg`,
           title: "DevHacks 2025",
           route: "/projects/devhacks-2025"
         },
         {
-          image: "/media/gamejam-2024.jpg",
+          image: `${process.env.PUBLIC_URL || ''}/media/gamejam-2024.jpg`,
           title: "GameJam 2024",
           route: "/projects/gamejam-2024"
         }
@@ -109,17 +109,17 @@ export default function InfoPanel({ activeIndex = 0, showFooterPopup = false }) 
       showInfoBoxes: true,
       infoBoxes: [
         {
-          image: "/media/photography.jpg",
+          image: `${process.env.PUBLIC_URL || ''}/media/photography.jpg`,
           title: "Photography",
           route: "/hobbies/photography"
         },
         {
-          image: "/media/arduino.jpg",
+          image: `${process.env.PUBLIC_URL || ''}/media/arduino.jpg`,
           title: "Arduino",
           route: "/hobbies/arduino"
         },
         {
-          image: "/media/hiking.jpg",
+          image: `${process.env.PUBLIC_URL || ''}/media/hiking.jpg`,
           title: "Hiking",
           route: "/hobbies/hiking"
         }
