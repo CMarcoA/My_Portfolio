@@ -157,9 +157,9 @@
     transform: translateY(0) scale(1);
   }
 }
-.mp-body { max-width: 52ch; }
+.mp-body { max-width: 80ch; }
 .mp-lead {
-  font-size: clamp(16px, 1.3vw, 20px);
+  font-size: clamp(14px, 1.1vw, 18px);
   line-height: 1.6;
   color: var(--ink-soft);
 }

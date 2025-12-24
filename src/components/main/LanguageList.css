@@ -1,0 +1,32 @@
+.language-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+  max-width: 52ch;
+}
+
+.language-logo {
+  aspect-ratio: 1; /* Makes it square */
+  width: 100%;
+  background: var(--paper);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.language-logo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.language-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InfoBox from "./InfoBox";
 import FooterPopup from "../transitions/FooterPopup";
+import LanguageList from "./LanguageList";
 import "./main.css";
 
 /**
@@ -32,14 +33,22 @@ export default function InfoPanel({ activeIndex = 0, showFooterPopup = false }) 
       key: "about",
       headingLines: ["Claudius Marco", "Andrew"],
       paragraphs: [
-        "The bee, of course, flies anyway because bees don't care what humans think is impossible. Yellow, black. Yellow, black. Yellow, black. Yellow, black. University of Manitoba 28'",
-        
+        "I'm a 3rd year Computer Science student at UofManitoba. Currently focused on building my skills in UI and software design, as well as robotics. Recently I not only enjoy designing and building interfaces, but I also want to push my understanding of user behaviors, and implementing it with solid architecture.",
       ],
       bullets: [
         "Focus: HCI research, robotics (ROS), modern React, and systems thinking",
       ],
       footerNote: "Swipe the Polaroid cards →",
       showInfoBoxes: false,
+      logos: [
+        { src: "/media/logos/css3.png", alt: "CSS3" },
+        { src: "/media/logos/python.png", alt: "Python" },
+        { src: "/media/logos/ros.png", alt: "ROS" },
+        { src: "/media/logos/html15-js.png", alt: "HTML5 & JavaScript" },
+        { src: "/media/logos/html15.png", alt: "HTML5" },
+        { src: "/media/logos/react.png", alt: "React" },
+        { src: "/media/logos/java.png", alt: "Java" },
+      ],
     },
     {
       key: "experience",
@@ -151,9 +160,14 @@ export default function InfoPanel({ activeIndex = 0, showFooterPopup = false }) 
         })}
       </h1>
 
-      {/* Only the first paragraph for this section */}
+      {/* Paragraphs for this section */}
       <div className="mp-body">
-        {s.paragraphs[0] && <p className="mp-lead">{s.paragraphs[0]}</p>}
+        {s.paragraphs.map((paragraph, index) => (
+          paragraph && <p key={index} className="mp-lead">{paragraph}</p>
+        ))}
+        
+        {/* Language List for About Me section */}
+        {s.logos && s.logos.length > 0 && <LanguageList logos={s.logos} />}
       </div>
 
       {/* InfoBoxes for Experience, Projects, and Hobbies */}
