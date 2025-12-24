@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InfoBox from "./InfoBox";
+import FooterPopup from "../transitions/FooterPopup";
 import "./main.css";
 
 /**
@@ -10,7 +11,7 @@ import "./main.css";
  *  - First paragraph
  * Everything else remains in the model but is not shown.
  */
-export default function InfoPanel({ activeIndex = 0 }) {
+export default function InfoPanel({ activeIndex = 0, showFooterPopup = false }) {
   const [isAnimating, setIsAnimating] = useState(false);
 
   const handleTitleHover = () => {
@@ -51,17 +52,17 @@ export default function InfoPanel({ activeIndex = 0 }) {
         {
           image: "/media/hci-research.jpg",
           title: "HCI Research Student",
-          route: "/experience"
+          route: "/experience/hci-research-student"
         },
         {
           image: "/media/kawasaki-intern.jpg", 
           title: "Kawasaki Sales Intern",
-          route: "/experience"
+          route: "/experience/kawasaki-sales-intern"
         },
         {
           image: "/media/permika-president.jpg",
           title: "PERMIKA - Co-President & Secretary",
-          route: "/experience"
+          route: "/experience/permika-co-president"
         }
       ]
     },
@@ -76,17 +77,17 @@ export default function InfoPanel({ activeIndex = 0 }) {
         {
           image: "/media/jackal-research.jpg",
           title: "Jackal Research",
-          route: "/projects"
+          route: "/projects/jackal-research"
         },
         {
           image: "/media/devhacks-2025.jpg",
           title: "DevHacks 2025",
-          route: "/projects"
+          route: "/projects/devhacks-2025"
         },
         {
           image: "/media/gamejam-2024.jpg",
           title: "GameJam 2024",
-          route: "/projects"
+          route: "/projects/gamejam-2024"
         }
       ]
     },
@@ -101,17 +102,17 @@ export default function InfoPanel({ activeIndex = 0 }) {
         {
           image: "/media/photography.jpg",
           title: "Photography",
-          route: "/hobbies"
+          route: "/hobbies/photography"
         },
         {
           image: "/media/arduino.jpg",
           title: "Arduino",
-          route: "/hobbies"
+          route: "/hobbies/arduino"
         },
         {
           image: "/media/hiking.jpg",
           title: "Hiking",
-          route: "/hobbies"
+          route: "/hobbies/hiking"
         }
       ]
     },
@@ -169,7 +170,7 @@ export default function InfoPanel({ activeIndex = 0 }) {
             ))}
           </div>
           <div className="info-boxes-footer">
-            [Click any box to see more]
+            <FooterPopup show={showFooterPopup} />
           </div>
         </>
       )}

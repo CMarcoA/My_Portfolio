@@ -36,8 +36,8 @@ export default function LandingPage({ onAdvance }) {
     // Trigger fade-in effect
     const fadeTimer = setTimeout(() => setIsVisible(true), 100);
     
-    // Show prompt after 5 seconds
-         const promptTimer = setTimeout(() => setShowPrompt(true), 3500);
+    // Show prompt after 1.5 seconds
+    const promptTimer = setTimeout(() => setShowPrompt(true), 1500);
     
     // Scroll lock
     const prevBodyOverflow = document.body.style.overflow;

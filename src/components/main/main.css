@@ -170,12 +170,23 @@
 .mp-contact { display: none !important; }
 
 /* ========== CARD STACK (RIGHT) ========== */
-.mp-stack {
+.mp-stack-container {
   justify-self: start;              /* sit at the left edge of right column */
   height: var(--stack-height);
-  display: grid; place-items: center;
-  position: relative;
+  width: min(var(--stack-width), calc(var(--stack-height) * 0.75));
   min-width: 300px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mp-stack {
+  height: var(--stack-height);
+  display: grid; 
+  place-items: center;
+  position: relative;
+  width: min(var(--stack-width), calc(var(--stack-height) * 0.75));
 }
 
 .mp-card {
@@ -330,9 +341,11 @@
 .info-boxes-footer {
   text-align: center;
   margin-top: 32px;
-  font-size: 12px;
-  color: rgba(9, 40, 79, 0.7);
-  font-style: italic;
+  position: relative;
+  min-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Page Styles */

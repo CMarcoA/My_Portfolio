@@ -5,6 +5,11 @@ import "./main.css";
 export default function CardStack({ cards = [], initialIndex = 0, onIndexChange = () => {} }) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
+  // Sync with initialIndex when it changes (e.g., when returning from detail page)
+  useEffect(() => {
+    setCurrentIndex(initialIndex);
+  }, [initialIndex]);
+
   // Keep parent informed
   useEffect(() => { 
     onIndexChange(currentIndex % cards.length); 
@@ -86,6 +91,16 @@ function Card({ card, index, removeCard, totalCards }) {
         scale: 1.05,
         boxShadow: `0 ${15 + index * 5}px ${40 + index * 10}px rgba(0,0,0,${0.25 + index * 0.05})`,
       }}
+      whileHover={index === 0 ? {
+        scale: 1.05,
+        y: yOffset - 5,
+        boxShadow: `0 ${15 + index * 5}px ${40 + index * 10}px rgba(0,0,0,${0.22 + index * 0.05})`,
+        transition: {
+          type: "spring",
+          stiffness: 400,
+          damping: 25,
+        }
+      } : {}}
     >
       <div className="mp-card-inner">
         <div className="mp-card-header">{card.title}</div>

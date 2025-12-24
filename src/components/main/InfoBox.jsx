@@ -21,7 +21,16 @@ export default function InfoBox({
     if (onClick) {
       onClick();
     } else if (route) {
-      navigate(route);
+      // Determine which page section this belongs to based on route
+      let sourcePage = 'main';
+      if (route.startsWith('/experience/')) {
+        sourcePage = 'experience';
+      } else if (route.startsWith('/projects/')) {
+        sourcePage = 'projects';
+      } else if (route.startsWith('/hobbies/')) {
+        sourcePage = 'hobbies';
+      }
+      navigate(route, { state: { from: sourcePage } });
     }
   };
 

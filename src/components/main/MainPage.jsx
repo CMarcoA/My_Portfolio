@@ -1,12 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import InfoPanel from "./InfoPanel";
 import CardStack from "./CardStack";
+import HelpPopup from "../transitions/HelpPopup";
 import "./main.css";
 
+// Track if main page has been shown before (persists across remounts)
+let hasShownMainPage = false;
+
 export default function MainPage() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const location = useLocation();
+  // Check if we're returning from a detail page with a specific card to show
+  const initialIndex = location.state?.activeCard ?? 0;
+  const [activeIndex, setActiveIndex] = useState(initialIndex);
   const [isVisible, setIsVisible] = useState(false);
+  const [showHelpPopup, setShowHelpPopup] = useState(false);
+  const [showFooterPopup, setShowFooterPopup] = useState(false);
+  const pageTimerRef = useRef(null);
+  const footerTimerRef = useRef(null);
 
   const cards = [
     { id: 0, title: "About me", image: "/media/img1.jpg", caption: "Passionate CS student exploring HCI research and robotics" },
@@ -16,14 +28,71 @@ export default function MainPage() {
   ];
 
   useEffect(() => {
-    // Trigger fade-in effect when component mounts
-    console.log("MainPage mounted, starting fade-in"); // Debug log
-    const fadeTimer = setTimeout(() => {
-      console.log("Setting isVisible to true"); // Debug log
+    // Only fade in if this is the first time showing the main page (from landing page)
+    // Skip fade if returning from a detail page
+    if (!hasShownMainPage) {
+      console.log("MainPage mounted, starting fade-in"); // Debug log
+      const fadeTimer = setTimeout(() => {
+        console.log("Setting isVisible to true"); // Debug log
+        setIsVisible(true);
+        hasShownMainPage = true;
+      }, 100);
+      return () => clearTimeout(fadeTimer);
+    } else {
+      // Already shown before, skip fade and show immediately
       setIsVisible(true);
-    }, 100);
-    return () => clearTimeout(fadeTimer);
+    }
   }, []);
+
+  // Track page changes - show card popup if user hasn't navigated to next page after 2 seconds (only on About me page)
+  useEffect(() => {
+    // Clear any existing timer
+    if (pageTimerRef.current) {
+      clearTimeout(pageTimerRef.current);
+    }
+    
+    // Hide popup when page changes
+    setShowHelpPopup(false);
+    
+    // Only show popup on About me page (activeIndex === 0)
+    if (activeIndex === 0) {
+      // Start timer - if user is still on same page after 2 seconds, show popup
+      pageTimerRef.current = setTimeout(() => {
+        setShowHelpPopup(true);
+      }, 2000); // 2 seconds
+    }
+
+    return () => {
+      if (pageTimerRef.current) {
+        clearTimeout(pageTimerRef.current);
+      }
+    };
+  }, [activeIndex]);
+
+  // Track page changes - show footer popup if user hasn't navigated to next page after 2 seconds (only on Experience page)
+  useEffect(() => {
+    // Clear any existing timer
+    if (footerTimerRef.current) {
+      clearTimeout(footerTimerRef.current);
+    }
+    
+    // Hide popup when page changes
+    setShowFooterPopup(false);
+    
+    // Only show popup on Experience page (activeIndex === 1)
+    if (activeIndex === 1) {
+      // Start timer - if user is still on same page after 2 seconds, show popup
+      footerTimerRef.current = setTimeout(() => {
+        setShowFooterPopup(true);
+      }, 2000); // 2 seconds
+    }
+
+    return () => {
+      if (footerTimerRef.current) {
+        clearTimeout(footerTimerRef.current);
+      }
+    };
+  }, [activeIndex]);
 
   return (
     <>
@@ -38,12 +107,15 @@ export default function MainPage() {
       <div className={`mp-root ${isVisible ? 'fade-in' : ''}`}>
         <Navbar />
         <div className="mp-layout">
-          <InfoPanel activeIndex={activeIndex} />
-          <CardStack
-            cards={cards}
-            initialIndex={0}
-            onIndexChange={setActiveIndex}
-          />
+          <InfoPanel activeIndex={activeIndex} showFooterPopup={showFooterPopup} />
+          <div className="mp-stack-container">
+            <CardStack
+              cards={cards}
+              initialIndex={initialIndex}
+              onIndexChange={setActiveIndex}
+            />
+            <HelpPopup show={showHelpPopup} />
+          </div>
         </div>
       </div>
     </>

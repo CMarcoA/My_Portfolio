@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useMemo, useCallback, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/main/Navbar";
 import TitleStepper from "../components/main/TitleStepper";
 import "../components/main/main.css";
@@ -9,6 +9,7 @@ import { getExperienceById, getExperienceNeighbors } from "./experienceData";
 export default function ExperiencePage() {
   const { experienceId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const experience = useMemo(() => getExperienceById(experienceId), [experienceId]);
   const neighbors = useMemo(() => getExperienceNeighbors(experience.id), [experience.id]);
   const carouselRef = useRef(null);
@@ -22,7 +23,7 @@ export default function ExperiencePage() {
 
     let animationFrame;
     let lastTime = performance.now();
-    const scrollSpeed = 0.03; // pixels per millisecond
+    const scrollSpeed = 0.05; // pixels per millisecond
     
     const scroll = (currentTime) => {
       if (!carousel || isHovered) {
@@ -67,8 +68,15 @@ export default function ExperiencePage() {
   }, [navigate, neighbors]);
 
   const handleExit = useCallback(() => {
-    navigate('/');
-  }, [navigate]);
+    // Check if we came from a specific page section
+    const fromPage = location.state?.from;
+    if (fromPage === 'experience') {
+      // Navigate to main page with experience card active (card index 1)
+      navigate('/', { state: { activeCard: 1 } });
+    } else {
+      navigate('/');
+    }
+  }, [navigate, location.state]);
 
   return (
     <div className="experience-root">
@@ -152,13 +160,6 @@ export default function ExperiencePage() {
                   </div>
                 </div>
               )}
-            </div>
-            <div className="experience-footer">
-              <TitleStepper
-                title="Exit"
-                onPrev={() => handleNavigate("prev")}
-                onNext={handleExit}
-              />
             </div>
           </div>
         </div>

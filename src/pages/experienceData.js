@@ -35,30 +35,11 @@ export const experiences = [
         alt: "Whiteboard covered in interaction flows and interview notes",
         caption: "Affinity diagramming session turning interviews into action.",
       },
-    ],
-  },
-  {
-    id: "kawasaki-sales-intern",
-    title: "Kawasaki Sales Intern",
-    year: "2023 Season",
-    headline: "Kawasaki · Regional Sales & Partnerships",
-    about: [
-      "Supported the regional sales team on channel partner operations and product launch events.",
-    ],
-    learned: [
-      "Translated technical product specs into compelling value propositions for dealerships.",
-      "Balanced stakeholder priorities between supply, marketing, and finance teams.",
-    ],
-    contributions: [
-      "Produced weekly sales intelligence dashboards used by 15+ partner stores.",
-      "Coordinated two demo-day activations that generated 200+ qualified leads.",
-    ],
-    media: [
       {
-        src: "/media/kawasaki-intern.jpg",
+        src: "/media/img1.jpg",
         placeholder: "/media/img1.jpg",
-        alt: "Claudius standing beside a Kawasaki motorcycle at a demo event",
-        caption: "Demo day setup for the Ninja ZX-6R product launch.",
+        alt: "HCI research lab workspace with collaborative tools",
+        caption: "Collaborative workspace in the HCI lab.",
       },
     ],
   },
@@ -84,6 +65,67 @@ export const experiences = [
         placeholder: "/media/img1.jpg",
         alt: "Crowd celebrating at a PERMIKA cultural night event",
         caption: "Cultural Night 2024 featuring local artists and community partners.",
+      },
+      {
+        src: "/media/img1.jpg",
+        placeholder: "/media/img1.jpg",
+        alt: "PERMIKA community gathering and cultural showcase",
+        caption: "Community gathering showcasing Indonesian culture.",
+      },
+      {
+        src: "/media/img1.jpg",
+        placeholder: "/media/img1.jpg",
+        alt: "PERMIKA event planning and organization meeting",
+        caption: "Event planning session with PERMIKA team members.",
+      },
+      {
+        src: "/media/img1.jpg",
+        placeholder: "/media/img1.jpg",
+        alt: "PERMIKA student association activities and engagement",
+        caption: "Student engagement activities organized by PERMIKA.",
+      },
+    ],
+  },
+  {
+    id: "kawasaki-sales-intern",
+    title: "Kawasaki Sales Intern",
+    year: "2023 Season",
+    headline: "Kawasaki · Regional Sales & Partnerships",
+    about: [
+      "Supported the regional sales team on channel partner operations and product launch events.",
+    ],
+    learned: [
+      "Translated technical product specs into compelling value propositions for dealerships.",
+      "Balanced stakeholder priorities between supply, marketing, and finance teams.",
+    ],
+    contributions: [
+      "Produced weekly sales intelligence dashboards used by 15+ partner stores.",
+      "Coordinated two demo-day activations that generated 200+ qualified leads.",
+    ],
+    media: [
+      {
+        src: "/media/kawasaki-intern.jpg",
+        placeholder: "/media/img1.jpg",
+        alt: "Claudius standing beside a Kawasaki motorcycle at a demo event",
+        caption: "Demo day setup for the Ninja ZX-6R product launch.",
+      },
+      {
+        src: "/media/kawasaki-intern.jpg",
+        placeholder: "/media/img1.jpg",
+        alt: "Kawasaki product showcase and sales presentation",
+        caption: "Product showcase at regional dealership event.",
+      },
+      {
+        src: "/media/kawasaki-intern.jpg",
+        placeholder: "/media/img1.jpg",
+        alt: "Kawasaki sales team collaboration and strategy meeting",
+        caption: "Sales strategy meeting with regional partners.",
+      },
+      {
+        src: "/media/kawasaki-intern.jpg",
+        placeholder: "/media/img1.jpg",
+        alt: "Kawasaki motorcycle display at dealership showroom",
+        caption: "Showroom display featuring latest Kawasaki models.",
       },
     ],
   },

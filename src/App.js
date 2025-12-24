@@ -45,8 +45,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/experience/:experienceId?" element={<ExperiencePage />} />
-          <Route path="/hobbies" element={<HobbiesPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/hobbies/:hobbyId?" element={<HobbiesPage />} />
+          <Route path="/projects/:projectId?" element={<ProjectsPage />} />
         </Routes>
       </div>
     </Router>
