@@ -21,8 +21,8 @@ export default function MainPage() {
   const footerTimerRef = useRef(null);
 
   const cards = [
-    { id: 0, title: "About me", image: `${process.env.PUBLIC_URL || ''}/media/img1.jpg`, caption: "Passionate CS student exploring HCI research and robotics" },
-    { id: 1, title: "Experience", image: `${process.env.PUBLIC_URL || ''}/media/img1.jpg`, caption: "Building skills in research, sales, and leadership roles" },
+    { id: 0, title: "About me", image: `${process.env.PUBLIC_URL || ''}/media/Photos/AboutMe/AboutMe.jpg`, caption: "The Whistler Blackcomb Trail, British Columbia | Summer 2025" },
+    { id: 1, title: "Experience", image: `${process.env.PUBLIC_URL || ''}/media/Photos/Experience/Experience_MAIN.JPEG`, caption: "PERMIKA Nasional Summit | Fall 2025" },
     { id: 2, title: "Projects", image: `${process.env.PUBLIC_URL || ''}/media/img1.jpg`, caption: "Creating innovative solutions through coding and collaboration" },
     { id: 3, title: "Hobbies", image: `${process.env.PUBLIC_URL || ''}/media/img1.jpg`, caption: "Capturing moments through photography and tinkering with Arduino" },
   ];
@@ -44,7 +44,7 @@ export default function MainPage() {
     }
   }, []);
 
-  // Track page changes - show card popup if user hasn't navigated to next page after 2 seconds (only on About me page)
+  // Track page changes - show card popup if user hasn't navigated to next page after 4 seconds (only on About me page)
   useEffect(() => {
     // Clear any existing timer
     if (pageTimerRef.current) {
@@ -56,10 +56,10 @@ export default function MainPage() {
     
     // Only show popup on About me page (activeIndex === 0)
     if (activeIndex === 0) {
-      // Start timer - if user is still on same page after 2 seconds, show popup
+      // Start timer - if user is still on same page after 4 seconds, show popup
       pageTimerRef.current = setTimeout(() => {
         setShowHelpPopup(true);
-      }, 2000); // 2 seconds
+      }, 4000); // 4 seconds
     }
 
     return () => {

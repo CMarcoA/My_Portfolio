@@ -59,17 +59,17 @@ export default function InfoPanel({ activeIndex = 0, showFooterPopup = false }) 
       showInfoBoxes: true,
       infoBoxes: [
         {
-          image: `${process.env.PUBLIC_URL || ''}/media/hci-research.jpg`,
+          image: `${process.env.PUBLIC_URL || ''}/media/Photos/Experience/Experience_HCI.jpg`,
           title: "HCI Research Student",
           route: "/experience/hci-research-student"
         },
         {
-          image: `${process.env.PUBLIC_URL || ''}/media/kawasaki-intern.jpg`, 
+          image: `${process.env.PUBLIC_URL || ''}/media/Photos/Experience/Experience_Kawasaki.JPG`, 
           title: "Kawasaki Sales Intern",
           route: "/experience/kawasaki-sales-intern"
         },
         {
-          image: `${process.env.PUBLIC_URL || ''}/media/permika-president.jpg`,
+          image: `${process.env.PUBLIC_URL || ''}/media/Photos/Experience/Experience_Permika.JPG`,
           title: "PERMIKA - Co-President & Secretary",
           route: "/experience/permika-co-president"
         }
@@ -84,17 +84,17 @@ export default function InfoPanel({ activeIndex = 0, showFooterPopup = false }) 
       showInfoBoxes: true,
       infoBoxes: [
         {
-          image: `${process.env.PUBLIC_URL || ''}/media/jackal-research.jpg`,
+          image: `${process.env.PUBLIC_URL || ''}/media/Photos/Projects/Projects_Jackal.jpg`,
           title: "Jackal Research",
           route: "/projects/jackal-research"
         },
         {
-          image: `${process.env.PUBLIC_URL || ''}/media/devhacks-2025.jpg`,
+          image: `${process.env.PUBLIC_URL || ''}/media/Photos/Projects/Projects_Devhacks.jpg`,
           title: "DevHacks 2025",
           route: "/projects/devhacks-2025"
         },
         {
-          image: `${process.env.PUBLIC_URL || ''}/media/gamejam-2024.jpg`,
+          image: `${process.env.PUBLIC_URL || ''}/media/Photos/Projects/Projects_Gamejam.jpg`,
           title: "GameJam 2024",
           route: "/projects/gamejam-2024"
         }
@@ -114,7 +114,7 @@ export default function InfoPanel({ activeIndex = 0, showFooterPopup = false }) 
           route: "/hobbies/photography"
         },
         {
-          image: `${process.env.PUBLIC_URL || ''}/media/arduino.jpg`,
+          image: `${process.env.PUBLIC_URL || ''}/media/Photos/Hobbies/Hobbies_Arduino.jpg`,
           title: "Arduino",
           route: "/hobbies/arduino"
         },

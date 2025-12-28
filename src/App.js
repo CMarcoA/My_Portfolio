@@ -47,6 +47,7 @@ export default function App() {
           <Route path="/experience/:experienceId?" element={<ExperiencePage />} />
           <Route path="/hobbies/:hobbyId?" element={<HobbiesPage />} />
           <Route path="/projects/:projectId?" element={<ProjectsPage />} />
+          <Route path="/pdf" element={<PDFViewerPage />} />
         </Routes>
       </div>
     </Router>
