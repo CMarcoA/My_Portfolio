@@ -6,6 +6,7 @@ import MainPage from "./components/main/MainPage";
 import ExperiencePage from "./pages/ExperiencePage";
 import HobbiesPage from "./pages/HobbiesPage";
 import ProjectsPage from "./pages/ProjectsPage";
+import ClauResume from "./components/resume/resume";
 
 /**
  * App.js
@@ -43,11 +44,11 @@ export default function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<MainPage />} />
           <Route path="/experience/:experienceId?" element={<ExperiencePage />} />
           <Route path="/hobbies/:hobbyId?" element={<HobbiesPage />} />
           <Route path="/projects/:projectId?" element={<ProjectsPage />} />
-          <Route path="/pdf" element={<PDFViewerPage />} />
+          <Route path="/My_Portfolio/media/PDFs/Claudius_Marco_Andrew_resumeF25.pdf" element={<ClauResume />}/>
+          <Route path="/" element={<MainPage />} />
         </Routes>
       </div>
     </Router>

@@ -19,7 +19,7 @@ export default function Navbar() {
         </a>
 
         <a className="mp-btn" href="#contact">Contact me</a>
-        <a className="mp-btn" href="/resume.pdf" target="_blank" rel="noreferrer">
+        <a className="mp-btn" href="/My_Portfolio/media/PDFs/Claudius_Marco_Andrew_resumeF25.pdf" target="_blank" rel="noreferrer">
           My Resume
         </a>
       </div>

@@ -5,6 +5,7 @@ import InfoPanel from "./InfoPanel";
 import CardStack from "./CardStack";
 import HelpPopup from "../transitions/HelpPopup";
 import "./main.css";
+import ClauResume from "../resume/resume";
 
 // Track if main page has been shown before (persists across remounts)
 let hasShownMainPage = false;
@@ -114,9 +115,11 @@ export default function MainPage() {
               initialIndex={initialIndex}
               onIndexChange={setActiveIndex}
             />
+            
             <HelpPopup show={showHelpPopup} />
           </div>
         </div>
+      
       </div>
     </>
   );
