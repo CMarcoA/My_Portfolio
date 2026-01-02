@@ -75,6 +75,17 @@
   opacity: 1;
 }
 
+/* Shader Gradient Canvas */
+.mp-shader-gradient {
+  pointer-events: none; /* clicks pass through */
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.mp-shader-gradient.fade-in {
+  opacity: 1;
+}
+
 /* Soft gradient wash above the video */
 .mp-bg-gradient {
   position: fixed;
@@ -94,7 +105,7 @@
 }
 
 .mp-bg-gradient.fade-in {
-  opacity: 0.95;
+  opacity: 0.4;
 }
 
 /* Grid with left at 50% and a 7% left gutter */

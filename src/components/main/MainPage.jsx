@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
+import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
 import Navbar from "./Navbar";
 import InfoPanel from "./InfoPanel";
 import CardStack from "./CardStack";
 import HelpPopup from "../transitions/HelpPopup";
 import "./main.css";
-import ClauResume from "../resume/resume";
 
 // Track if main page has been shown before (persists across remounts)
 let hasShownMainPage = false;
@@ -98,10 +98,50 @@ export default function MainPage() {
   return (
     <>
       {/* Background layers (fixed) */}
-      <video className={`mp-video ${isVisible ? 'fade-in' : ''}`} autoPlay loop muted playsInline>
-        <source src="/media/shadergradient.webm" type="video/webm" />
-        <source src="/media/shadergradient.mp4" type="video/mp4" />
-      </video>
+      <ShaderGradientCanvas
+        className={`mp-shader-gradient ${isVisible ? 'fade-in' : ''}`}
+        style={{ position: 'fixed', inset: 0, zIndex: 0 }}
+        pixelDensity={2.5}
+        fov={40}
+      >
+        <ShaderGradient
+          animate="on"
+          brightness={1.2}
+          cAzimuthAngle={170}
+          cDistance={5.01}
+          cPolarAngle={70}
+          cameraZoom={1}
+          color1="#f2fcff"
+          color2="#00aeff"
+          color3="#f0ffff"
+          envPreset="city"
+          grain="off"
+          lightType="3d"
+          loop="on"
+          loopDuration={20}
+          positionX={0}
+          positionY={0.9}
+          positionZ={-0.3}
+          range="enabled"
+          rangeEnd={20}
+          rangeStart={0}
+          reflection={0.1}
+          rotationX={45}
+          rotationY={0}
+          rotationZ={0}
+          shader="defaults"
+          toggleAxis={false}
+          type="waterPlane"
+          uAmplitude={0.5}
+          uDensity={1.5}
+          uFrequency={2.0}
+          uSpeed={0.3}
+          uStrength={3.1}
+          uTime={0}
+          wireframe={false}
+          zoomOut={false}
+        />
+      </ShaderGradientCanvas>
       <div className={`mp-bg-gradient ${isVisible ? 'fade-in' : ''}`} aria-hidden />
 
       {/* Foreground content */}
