@@ -5,6 +5,13 @@ import "./main.css";
 export default function Navbar() {
   return (
     <nav className="mp-nav">
+      <div className="mp-nav-left">
+        <img 
+          src={`${process.env.PUBLIC_URL || ''}/media/logos/WebsiteLogo_My_Portfolio.png`} 
+          alt="C.MARCO Portfolio" 
+          className="mp-logo"
+        />
+      </div>
       <div className="mp-nav-right">
         {/* Icon-only pill with same background as other buttons */}
         <a

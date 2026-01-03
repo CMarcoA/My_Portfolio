@@ -6,6 +6,19 @@
   --lp-white: #ffffff;
 }
 
+/* Root wrapper that fades everything */
+.lp-root-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.lp-root-wrapper.fade-out {
+  opacity: 0;
+}
+
 /* ROOT */
 .lp-root {
   position: relative;
@@ -19,16 +32,11 @@
   
   /* Fade-in transition */
   opacity: 0;
-  transition: opacity 0.8s ease-in-out;
+  transition: opacity 1.2s ease-in-out;
 }
 
 .lp-root.fade-in {
   opacity: 1;
-}
-
-.lp-root.fade-out {
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
 }
 
 /* FULL-SCREEN VIDEO BACKGROUND (locked to viewport) */
@@ -44,7 +52,7 @@
 
 /* SOFT BLUE GRADIENT OVERLAY */
 .lp-gradient {
-  position: fixed;      /* <-- matches the video’s coordinates */
+  position: fixed;      /* <-- matches the shader gradient's coordinates */
   top: 0;
   left: 0;
   width: 100vw;
@@ -56,7 +64,7 @@
     #a6d6ff 60%,
     #cfe7ff 85%
   );
-  opacity: 0.95;
+  opacity: 0.3; /* Reduced opacity to allow shader gradient to show through */
   pointer-events: none;
   z-index: 1;
 }

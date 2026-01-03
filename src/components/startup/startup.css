@@ -1,9 +1,22 @@
 /* Import Jersey25 Font */
 @import url('https://fonts.googleapis.com/css2?family=Jersey+25&display=swap');
 
+/* Root wrapper that fades everything */
+.startup-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.startup-root.fade-out {
+  opacity: 0;
+}
+
 /* SEGA-Style Startup Screen */
 .startup-screen {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
@@ -11,7 +24,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
   overflow: hidden;
 }
 
@@ -40,7 +52,7 @@
     #a6d6ff 60%,
     #cfe7ff 85%
   );
-  opacity: 0.95;
+  opacity: 0.3; /* Reduced opacity to allow shader gradient to show through */
   pointer-events: none;
   z-index: 2;
 }
@@ -51,14 +63,6 @@
   z-index: 3;
 }
 
-/* Fade Out Effect */
-.startup-screen {
-  transition: opacity 0.5s ease-out;
-}
-
-.startup-screen.fade-out {
-  opacity: 0;
-}
 
 /* SEGA Logo */
 .sega-logo {
@@ -71,6 +75,8 @@
   opacity: 1;
   transform: scale(1);
 }
+
+
 
 .sega-text {
   font-family: 'Jersey 25', 'Arial Black', Arial, sans-serif;
@@ -123,6 +129,8 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+
 
 /* Animations */
 @keyframes segaGlow {

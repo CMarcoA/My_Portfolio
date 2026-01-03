@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import QuoteGenerator from "./QuoteGenerator";
+import ShaderGradientBackground from "../background/ShaderGradientBackground";
 import "./landing.css";
 
 /**
@@ -21,8 +22,8 @@ import "./landing.css";
  *   - This component is like a Java class that "has" (composition) a QuoteGenerator.
  *   - Props aren't needed here, but if we had them, they'd be like constructor params.
  */
-export default function LandingPage({ onAdvance }) {
-  const [isVisible, setIsVisible] = useState(false);
+export default function LandingPage({ onAdvance, shouldFadeIn = false }) {
+  const [isVisible, setIsVisible] = useState(false); // Always start invisible, fade in via CSS
   const [showPrompt, setShowPrompt] = useState(false);
   const [ripple, setRipple] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
@@ -32,9 +33,21 @@ export default function LandingPage({ onAdvance }) {
    * - While the LandingPage is mounted, disable page scrolling.
    * - On unmount, restore previous scroll/overscroll settings.
    */
+  // Handle fade-in based on shouldFadeIn prop
   useEffect(() => {
-    // Trigger fade-in effect
-    const fadeTimer = setTimeout(() => setIsVisible(true), 100);
+    if (shouldFadeIn) {
+      // For crossfade: start fading in with a tiny delay to ensure CSS transition works
+      const timer = setTimeout(() => setIsVisible(true), 50);
+      return () => clearTimeout(timer);
+    }
+  }, [shouldFadeIn]);
+
+  useEffect(() => {
+    // Normal fade-in if shouldFadeIn is false
+    let fadeTimer;
+    if (!shouldFadeIn) {
+      fadeTimer = setTimeout(() => setIsVisible(true), 100);
+    }
     
     // Show prompt after 1.5 seconds
     const promptTimer = setTimeout(() => setShowPrompt(true), 1500);
@@ -49,13 +62,13 @@ export default function LandingPage({ onAdvance }) {
     document.documentElement.style.overscrollBehavior = "none"; // prevent bounce on touch devices
 
     return () => {
-      clearTimeout(fadeTimer);
+      if (fadeTimer) clearTimeout(fadeTimer);
       clearTimeout(promptTimer);
       document.body.style.overflow = prevBodyOverflow || "";
       document.documentElement.style.overflow = prevHtmlOverflow || "";
       document.documentElement.style.overscrollBehavior = prevOverscroll || "";
     };
-  }, []);
+  }, [shouldFadeIn]);
 
   const handleButtonClick = () => {
     console.log("Button clicked!"); // Debug log
@@ -72,33 +85,22 @@ export default function LandingPage({ onAdvance }) {
         if (onAdvance) {
           onAdvance();
         }
-      }, 500); // Wait for fade out animation
+      }, 1200); // Wait for fade out animation (match CSS transition duration)
     }, 1000); // Wait 1 second
   };
 
   return (
-    <>
+    <div className={`lp-root-wrapper ${fadeOut ? 'fade-out' : ''}`}>
+      {/* Shader Gradient Background */}
+      <ShaderGradientBackground isVisible={isVisible} />
+      
       <section 
-        className={`lp-root ${isVisible ? 'fade-in' : ''} ${fadeOut ? 'fade-out' : ''}`}
+        className={`lp-root ${isVisible ? 'fade-in' : ''}`}
       >
-        {/* 
-          Background video:
-          - 'autoPlay', 'loop', 'muted', 'playsInline' ensure silent auto-play,
-            cross-browser friendliness, and no full-screen hijack on mobile.
-          - We provide BOTH WebM and MP4 so Safari/iOS can fall back to MP4.
-          - CSS (landing.css) pins this to the viewport via position: fixed.
-        */}
-        <video className="lp-video" autoPlay loop muted playsInline>
-          <source src="/media/shadergradient.webm" type="video/webm" />
-          <source src="/media/shadergradient.mp4" type="video/mp4" />
-          {/* Fallback text if video unsupported */}
-          Your browser does not support the video tag.
-        </video>
-
         {/*
           Gradient overlay:
-          - Sits above the video to improve text contrast.
-          - Also acts as a nice visual even if the video fails to load.
+          - Sits above the shader gradient to improve text contrast.
+          - Also acts as a nice visual even if the gradient fails to load.
           - Positioned/fixed in CSS so it always covers the viewport.
         */}
         <div className="lp-gradient" aria-hidden />
@@ -123,6 +125,6 @@ export default function LandingPage({ onAdvance }) {
           </button>
         )}
       </section>
-    </>
+    </div>
   );
 }

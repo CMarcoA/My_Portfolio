@@ -41,13 +41,15 @@ export default function InfoPanel({ activeIndex = 0, showFooterPopup = false }) 
       footerNote: "Swipe the Polaroid cards →",
       showInfoBoxes: false,
       logos: [
-        { src: `${process.env.PUBLIC_URL || ''}/media/logos/java.png`, alt: "Java" },
-        { src: `${process.env.PUBLIC_URL || ''}/media/logos/react.png`, alt: "React" },
-        { src: `${process.env.PUBLIC_URL || ''}/media/logos/ros.png`, alt: "ROS" },
-        { src: `${process.env.PUBLIC_URL || ''}/media/logos/html15.png`, alt: "HTML5" },
-        { src: `${process.env.PUBLIC_URL || ''}/media/logos/css3.png`, alt: "CSS3" },
-        { src: `${process.env.PUBLIC_URL || ''}/media/logos/html15-js.png`, alt: "HTML5 & JavaScript" },
-        { src: `${process.env.PUBLIC_URL || ''}/media/logos/python.png`, alt: "Python" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/java.png`, alt: "Java", skillLevel: "Confident" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/react.png`, alt: "React", skillLevel: "Working knowledge" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/ros.png`, alt: "ROS", skillLevel: "Working knowledge" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/html15.png`, alt: "HTML5", skillLevel: "Working knowledge" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/css3.png`, alt: "CSS3", skillLevel: "Working knowledge" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/JSLogo2.jpg`, alt: "JavaScript", skillLevel: "Learning" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/C++Logo.png`, alt: "C++", skillLevel: "Learning" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/python.png`, alt: "Python", skillLevel: "Learning" },
+        
       ],
     },
     {

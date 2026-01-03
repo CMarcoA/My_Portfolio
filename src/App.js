@@ -18,24 +18,56 @@ import ClauResume from "./components/resume/resume";
 export default function App() {
   const [showStartup, setShowStartup] = useState(true);
   const [showLanding, setShowLanding] = useState(false);
+  const [showMain, setShowMain] = useState(false);
+  const [startupFading, setStartupFading] = useState(false);
+  const [landingFading, setLandingFading] = useState(false);
 
   const handleStartupComplete = useCallback(() => {
-    setShowStartup(false);
+    setStartupFading(true);
+    // Start landing page fade-in immediately
     setShowLanding(true);
+    // Remove startup after fade completes
+    setTimeout(() => {
+      setShowStartup(false);
+    }, 1200); // Match startup fade duration
   }, []);
 
   const handleLandingAdvance = useCallback(() => {
-    setShowLanding(false);
+    setLandingFading(true);
+    // Start main page fade-in immediately
+    setShowMain(true);
+    // Remove landing after fade completes
+    setTimeout(() => {
+      setShowLanding(false);
+    }, 1200); // Match landing fade duration
   }, []);
 
-  if (showStartup) {
-    return <StartupScreen onComplete={handleStartupComplete} />;
-  }
-
-  if (showLanding) {
+  if (showStartup || showLanding || showMain) {
     return (
-      <div className="App">
-        <LandingPage onAdvance={handleLandingAdvance} />
+      <div className="App" style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
+        {showStartup && (
+          <div style={{ position: 'absolute', inset: 0, zIndex: startupFading ? 1 : 3 }}>
+            <StartupScreen onComplete={handleStartupComplete} />
+          </div>
+        )}
+        {showLanding && (
+          <div style={{ position: 'absolute', inset: 0, zIndex: startupFading ? 2 : landingFading ? 1 : 2 }}>
+            <LandingPage onAdvance={handleLandingAdvance} shouldFadeIn={startupFading} />
+          </div>
+        )}
+        {showMain && (
+          <div style={{ position: 'absolute', inset: 0, zIndex: landingFading ? 2 : 1 }}>
+            <Router>
+              <Routes>
+                <Route path="/experience/:experienceId?" element={<ExperiencePage />} />
+                <Route path="/hobbies/:hobbyId?" element={<HobbiesPage />} />
+                <Route path="/projects/:projectId?" element={<ProjectsPage />} />
+                <Route path="/My_Portfolio/media/PDFs/Claudius_Marco_Andrew_resumeF25.pdf" element={<ClauResume />}/>
+                <Route path="/" element={<MainPage shouldFadeIn={landingFading} />} />
+              </Routes>
+            </Router>
+          </div>
+        )}
       </div>
     );
   }
