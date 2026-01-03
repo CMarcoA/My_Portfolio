@@ -111,9 +111,9 @@ export default function MainPage() {
           cDistance={5.01}
           cPolarAngle={70}
           cameraZoom={1}
-          color1="#f2fcff"
-          color2="#00aeff"
-          color3="#f0ffff"
+          color1="#00aeff"
+          color2="#f5f5f5"
+          color3="#e8e8e8"
           envPreset="city"
           grain="off"
           lightType="3d"
@@ -135,7 +135,7 @@ export default function MainPage() {
           uAmplitude={0.5}
           uDensity={1.5}
           uFrequency={2.0}
-          uSpeed={0.3}
+          uSpeed={0.1}
           uStrength={3.1}
           uTime={0}
           wireframe={false}
