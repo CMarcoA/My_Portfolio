@@ -42,7 +42,7 @@ export default function ContactMePage() {
               </div>
               <div className="contact-info">
                 <h3>Email</h3>
-                <a href="mailto:your-email@example.com">your-email@example.com</a>
+                <a href="mailto:claudiusma2022@gmail.com">claudiusma2022@gmail.com</a>
               </div>
             </div>
 
@@ -52,7 +52,7 @@ export default function ContactMePage() {
               </div>
               <div className="contact-info">
                 <h3>School Email</h3>
-                <a href="mailto:your-student-email@umanitoba.ca">your-student-email@umanitoba.ca</a>
+                <a href="mailto:andrewcm@myumanitoba.ca">andrewcm@myumanitoba.ca</a>
               </div>
             </div>
 
@@ -62,8 +62,8 @@ export default function ContactMePage() {
               </div>
               <div className="contact-info">
                 <h3>LinkedIn</h3>
-                <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noreferrer">
-                  linkedin.com/in/yourprofile
+                <a href="https://www.linkedin.com/in/claudius-marco-andrew/" target="_blank" rel="noreferrer">
+                  linkedin.com/in/claudius-marco-andrew
                 </a>
               </div>
             </div>
@@ -74,7 +74,7 @@ export default function ContactMePage() {
               </div>
               <div className="contact-info">
                 <h3>Phone</h3>
-                <a href="tel:+1234567890">+1 (234) 567-8900</a>
+                <a href="tel:+12048699766">(204) 869-9766</a>
               </div>
             </div>
           </div>
