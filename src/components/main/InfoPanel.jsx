@@ -49,6 +49,7 @@ export default function InfoPanel({ activeIndex = 0, showFooterPopup = false }) 
         { src: `${process.env.PUBLIC_URL || ''}/media/logos/JSLogo2.jpg`, alt: "JavaScript", skillLevel: "Learning" },
         { src: `${process.env.PUBLIC_URL || ''}/media/logos/C++Logo.png`, alt: "C++", skillLevel: "Learning" },
         { src: `${process.env.PUBLIC_URL || ''}/media/logos/python.png`, alt: "Python", skillLevel: "Learning" },
+        { src: `${process.env.PUBLIC_URL || ''}/media/logos/unityLogo.png`, alt: "Unity", skillLevel: "Learning" },
         
       ],
     },
