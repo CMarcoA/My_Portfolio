@@ -6,6 +6,7 @@ import MainPage from "./components/main/MainPage";
 import ExperiencePage from "./pages/ExperiencePage";
 import HobbiesPage from "./pages/HobbiesPage";
 import ProjectsPage from "./pages/ProjectsPage";
+import ContactMePage from "./pages/ContactMePage";
 import ClauResume from "./components/resume/resume";
 
 /**
@@ -62,6 +63,7 @@ export default function App() {
                 <Route path="/experience/:experienceId?" element={<ExperiencePage />} />
                 <Route path="/hobbies/:hobbyId?" element={<HobbiesPage />} />
                 <Route path="/projects/:projectId?" element={<ProjectsPage />} />
+                <Route path="/contact" element={<ContactMePage />} />
                 <Route path="/My_Portfolio/media/PDFs/Claudius_Marco_Andrew_resumeF25.pdf" element={<ClauResume />}/>
                 <Route path="/" element={<MainPage shouldFadeIn={landingFading} />} />
               </Routes>
@@ -79,6 +81,7 @@ export default function App() {
           <Route path="/experience/:experienceId?" element={<ExperiencePage />} />
           <Route path="/hobbies/:hobbyId?" element={<HobbiesPage />} />
           <Route path="/projects/:projectId?" element={<ProjectsPage />} />
+          <Route path="/contact" element={<ContactMePage />} />
           <Route path="/My_Portfolio/media/PDFs/Claudius_Marco_Andrew_resumeF25.pdf" element={<ClauResume />}/>
           <Route path="/" element={<MainPage />} />
         </Routes>

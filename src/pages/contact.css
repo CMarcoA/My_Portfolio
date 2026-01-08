@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+25&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Akatab:wght@400;500;600;700;800;900&display=swap');
+
+.contact-root {
+  position: relative;
+  min-height: 100vh;
+  color: #00193a;
+  font-family: "Jomolhari", Georgia, "Times New Roman", serif;
+  overflow: hidden;
+}
+
+.contact-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.contact-box {
+  position: relative;
+  width: 600px;
+  max-width: 90vw;
+  background: #ffffff;
+  border-radius: 32px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.18);
+  padding: 60px 50px;
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.contact-header h1 {
+  margin: 0;
+  font-family: 'Jersey 25', 'Arial Black', Arial, sans-serif;
+  font-weight: 400;
+  font-size: clamp(32px, 5vw, 48px);
+  letter-spacing: 0.5px;
+  color: #00193A;
+  text-transform: uppercase;
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(0, 25, 58, 0.02);
+  transition: all 200ms ease;
+}
+
+.contact-item:hover {
+  background: rgba(0, 25, 58, 0.05);
+  transform: translateY(-2px);
+}
+
+.contact-icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(0, 25, 58, 0.1);
+  color: #00193A;
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.contact-info h3 {
+  margin: 0 0 8px 0;
+  font-family: 'Jersey 25', 'Arial Black', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.3px;
+  color: #00193A;
+  text-transform: uppercase;
+}
+
+.contact-info a {
+  font-family: 'Akatab', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #00193A;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.contact-info a:hover {
+  color: #004080;
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-box {
+    padding: 40px 30px;
+  }
+
+  .contact-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .contact-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .contact-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+

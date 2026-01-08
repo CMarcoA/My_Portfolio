@@ -1,5 +1,6 @@
 import React from "react";
 import { Github } from "lucide-react";
+import { Link } from "react-router-dom";
 import "./main.css";
 
 export default function Navbar() {
@@ -25,7 +26,7 @@ export default function Navbar() {
           <Github size={18} />
         </a>
 
-        <a className="mp-btn" href="#contact">Contact me</a>
+        <Link className="mp-btn" to="/contact">Contact me</Link>
         <a className="mp-btn" href="/My_Portfolio/media/PDFs/Claudius_Marco_Andrew_resumeF25.pdf" target="_blank" rel="noreferrer">
           My Resume
         </a>
